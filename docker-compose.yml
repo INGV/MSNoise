@@ -1,0 +1,39 @@
+services:
+
+   msnoise:
+    image: msnoise:latest
+    container_name: msnoise
+    hostname: msnoise
+      #    build:
+      #context: .
+      #dockerfile: ./dockerfile/Dockerfile
+    ports: 		
+     - '6901:6901'
+     - '5000:5000' 
+     - '1000:22'  
+    networks:
+     seiscomp-network:
+      ipv4_address: 172.21.0.2
+    volumes:
+     - type: bind
+       source: /backup/verna/SDS/2024
+       target: /remote-sds-archive
+       read_only: true
+     - type: volume
+       source: msnoise_mysql_data
+       target: /var/lib/mysql    
+
+#---------------------------
+
+volumes:
+  msnoise_mysql_data:
+    name: msnoise_mysql_data
+
+#---------------------------
+
+networks:
+ msnoise-network: 
+  name: msnoise-network
+  ipam:
+   config:
+    - subnet: 172.21.0.0/16
