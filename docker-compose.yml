@@ -12,11 +12,11 @@ services:
      - '5000:5000' 
      - '1000:22'  
     networks:
-     seiscomp-network:
+     msnoise-network:
       ipv4_address: 172.21.0.2
     volumes:
      - type: bind
-       source: /backup/verna/SDS/2024
+       source: /your-sds-archive
        target: /remote-sds-archive
        read_only: true
      - type: volume
