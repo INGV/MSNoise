@@ -75,8 +75,8 @@ e verificarne lo status con
 service mariadb status
 ```
 
-Avviato il database bisognera' eseguire lo script sql per la creazione dello schema, le tabelle
-e l'utente di MSNoise. Dalla cartella /root eseguire 
+Avviato il database bisognera' eseguire lo script sql per la creazione dello schema, delle tabelle
+e dell'utente di MSNoise. Dalla cartella /root eseguire 
 
 ```
 mariadb < create_schema_user_and_grants.sql
@@ -89,7 +89,7 @@ msnoise db init
 ```
 
 che avviera' un prompt interattivo dove bisognera' selezionare l'opzione 2 per mysql e digitare
-la password 'msnoise'. Tutte le altre opzioni possono essere lasciate a default premendo il tasto
+la password 'msnoise'. Tutte le altre opzioni possono essere lasciate con il valore di default premendo il tasto
 invio.
 
 Per avviare l'interfaccia grafica da cui configurare MSNoise si dovra' eseguire
