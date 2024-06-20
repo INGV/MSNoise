@@ -107,11 +107,7 @@ Dal tab Configuration selezionare config
 ![alt text](screenshots/config.png "Title")
 
 
-Nella schermata successiva editare data_folder e data_structure come mostrato 
-
-![alt text](screenshots/data-folder-data-structure.png "Title")
-
-/remote-sds-archive, YEAR/NET/STA/CHA/NET.STA..CHA.D.YEAR.DAY
+Nella schermata successiva editare data_folder aggiungendo il path del container su cui e' stato montato l'archivio SDS 
 
 Nella cartella /root aggiungere il file custom.py con il seguente script
 
