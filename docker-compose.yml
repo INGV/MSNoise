@@ -22,12 +22,18 @@ services:
      - type: volume
        source: msnoise_mysql_data
        target: /var/lib/mysql    
+     - type: volume
+       source: msnoise_project_root
+       target: /home/msnoise
+   
 
 #---------------------------
 
 volumes:
   msnoise_mysql_data:
     name: msnoise_mysql_data
+  msnoise_project_root:
+    name: msnoise_project_root  
 
 #---------------------------
 

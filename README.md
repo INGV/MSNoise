@@ -63,20 +63,14 @@ Una volta istanziato il container e' possibile accedervi con
 docker exec -it msnoise bash
 ```
 
-Avviare il database MariaDB eseguendo il comando 
-
-```
-mariadbd-safe &
-```
-
-e verificarne lo status con 
+Verificarne lo status del database con 
 
 ```
 service mariadb status
 ```
 
-Avviato il database bisognera' eseguire lo script sql per la creazione dello schema, delle tabelle
-e dell'utente di MSNoise. Dalla cartella /root eseguire 
+Eseguire lo script sql per la creazione dello schema, delle tabelle
+e dell'utente di MSNoise. Dalla cartella /home/msnoise eseguire 
 
 ```
 mariadb < create_schema_user_and_grants.sql
@@ -90,7 +84,7 @@ msnoise db init
 
 che avviera' un prompt interattivo dove bisognera' selezionare l'opzione 2 per mysql e digitare
 la password 'msnoise'. Tutte le altre opzioni possono essere lasciate con il valore di default premendo il tasto
-invio.
+invio. Al termine della procedura verra' creato il file db.ini.
 
 Per avviare l'interfaccia grafica da cui configurare MSNoise si dovra' eseguire
 
@@ -100,29 +94,15 @@ msnoise admin &
 
 Questa sara' raggiungible sulla porta 5000 del server su cui e' stato istanziato il container.
 
-## Configurazione data_dir e data_structure
+## Configurazione data_folder e data_structure
 
 Dal tab Configuration selezionare config
 
 ![alt text](screenshots/config.png "Title")
 
 
-Nella schermata successiva editare data_folder aggiungendo il path del container su cui e' stato montato l'archivio SDS 
+Nella schermata successiva editare data_folder aggiungendo il path del container su cui e' stato montato l'archivio SDS (nel nostro caso /remote-sds-archive).
 
-Nella cartella /root aggiungere il file custom.py con il seguente script
-
-```
-import os, glob
-def populate(data_folder):
-    datalist = sorted(glob.glob(os.path.join(data_folder, "*", "*")))
-    stationdict = {}
-    for di in datalist:
-        tmp = os.path.split(di)
-        sta = tmp[1]
-        net = os.path.split(tmp[0])[1]
-        stationdict[net+"_"+sta]=[net,sta,0.0,0.0,0.0,'UTM','N/A']
-    return stationdict
-```
 
 Adesso e' possibile eseguire il comando
 
@@ -136,3 +116,31 @@ Se il comando sara' stato eseguito correttamente nella sezione Station del tab C
 
 ![alt text](screenshots/station.png "Title")
 
+## Cosa fare se
+
+Nel caso in cui il browser non sia in grado di restituire la pagina di amministrazione entrare nel container con
+
+```
+docker exec -it msnoise bash
+```
+
+eseguire il comando
+
+```
+top
+```
+
+ed ottenuto il PID del processo msnoise eseguire
+
+
+```
+kill -9 $PID
+```
+
+Questo consente di arrestare il processo. Il comando "top" non dovrebbe piu' mostrare il processo
+msnoise nell'elenco.
+A questo punto riavviare l'interfaccia di amministrazione con 
+
+```
+msnoise admin &
+```
