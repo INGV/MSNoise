@@ -142,5 +142,5 @@ msnoise nell'elenco.
 A questo punto riavviare l'interfaccia di amministrazione con 
 
 ```
-msnoise admin &
+msnoise admin 
 ```
