@@ -1,0 +1,4 @@
+year_to_scan=2023,2024
+network=4P,ET
+channel=HHZ
+no_scan_station=A23,MIC0,MIC1,MIC3,SOE1,SOE2T,SOE3

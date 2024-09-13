@@ -10,15 +10,21 @@ services:
     ports: 		
      - '6901:6901'
      - '5000:5000' 
-     - '1000:22'  
+     - '1001:22'  
     networks:
      msnoise-network:
       ipv4_address: 172.21.0.2
     volumes:
      - type: bind
        source: /your-sds-archive
-       target: /remote-sds-archive
+       target: /sds-archive
        read_only: true
+     - type: bind
+       source: ./msnoise-outcome-files
+       target: /msnoise-outcome-files   
+     - type: bind
+       source: ./inventories-for-station-not-on-fdsn
+       target: /inventories-for-station-not-on-fdsn
      - type: volume
        source: msnoise_mysql_data
        target: /var/lib/mysql    
