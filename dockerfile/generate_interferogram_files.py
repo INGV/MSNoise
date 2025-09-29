@@ -39,14 +39,17 @@ for net, sta, loc_codes in rows:
         net_sta = f"{net}.{sta}"  # No location code, just net and station
         net_sta_list.append(net_sta)
 
-# Generate the current timestamp in the desired format (DDMMYYYY-HH:MM:SSS)
-timestamp = datetime.datetime.now().strftime("%d%m%Y-%H%M%S")
+sorted_net_sta_list = sorted(net_sta_list)
 
 # Generate and execute commands for each pair of net.sta
-for i in range(len(net_sta_list)):
+for i in range(len(sorted_net_sta_list)):
     net_sta1 = net_sta_list[i]
-    for j in range(i + 1, len(net_sta_list)):
+    for j in range(i + 1, len(sorted_net_sta_list)):
         net_sta2 = net_sta_list[j]
+        
+        # Generate the current timestamp in the desired format (DDMMYYYY-HH:MM:SSS)
+        timestamp = datetime.datetime.now().strftime("%d%m%Y-%H%M%S")
+
 
         # Define the command to generate interferogram, with timestamp in the filename
         command = f"msnoise cc plot interferogram {net_sta1} {net_sta2} -o interferogram_{net_sta1}-{net_sta2}_{timestamp}.png"
